@@ -26,7 +26,7 @@ class HistoryService {
   // TODO: Define a write method that writes the updated cities array to the searchHistory.json file
   private async write(cities: City[]): Promise<void> {
     try {
-      await fstat.writeFile(this.filePath, JSON.stringify(cities, null, 2));
+      await fs.writeFile(this.filePath, JSON.stringify(cities, null, 2));
     } catch (error) {
       console.error('Error writing to file:', error);
     }
@@ -36,9 +36,9 @@ class HistoryService {
     return await this.read();
   }
   // TODO Define an addCity method that adds a city to the searchHistory.json file
-  async addCity(cityName: string): Promise<City>[] {
+  async addCity(cityName: string): Promise<City> {
     const cities = await this.getCities();
-    const newCity = new City(cityNAme, uuidv4());
+    const newCity = new City(cityName, uuidv4());
     cities.push(newCity);
     await this.write(cities);
     return newCity;
