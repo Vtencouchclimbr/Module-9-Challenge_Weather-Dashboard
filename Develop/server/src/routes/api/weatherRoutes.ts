@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
   const { cityName } = req.body;
 
   if (!cityName) {
-    return res.status(400).json({ error: 'City name is required'});
+    return res.status(400).json({ error: 'City name is required' });
   }
   try {
     const weatherData = await WeatherService.getWeatherForCity(cityName);
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
     res.json({ city: cityWithId, weather: weatherData });
   } catch (error) {
     console.error('Error processing request:', error);
-    res.status(500).json({ error: 'Failed to retrieve weather data or save city to history'});
+    res.status(500).json({ error: 'Failed to retrieve weather data or save city to history' });
   }
 });
 
@@ -32,7 +32,7 @@ router.get('/history', async (req, res) => {
     res.json(history);
   } catch (error) {
     console.error('Error retrieving history:', error);
-    res.status(500).json({ error: 'Failed to retrieve search history '});
+    res.status(500).json({ error: 'Failed to retrieve search history' });
   }
 });
 

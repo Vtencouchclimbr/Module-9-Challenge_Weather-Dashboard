@@ -68,16 +68,16 @@ private async fetchWeatherData(coordinates: Coordinates): Promise<any> {
   // TODO: Build parseCurrentWeather method
 private parseCurrentWeather(response: any): Weather {
   return new Weather(
-    currentWeather.main.temp,
-    currentWeather.main.humidity,
-    currentWeather.wind.speed,
-    currentWeather.weather[0].description,
-    currentWeather.weather[0].icon
+    response.main.temp,
+    response.main.humidity,
+    response.wind.speed,
+    response.weather[0].description,
+    response.weather[0].icon
   );
 }
   // TODO: Complete buildForecastArray method
 private buildForecastArray(currentWeather: Weather, weatherData: any[]): Weather[] {
-  return weatherData.map(data => {
+  const forecastArray = weatherData.map(data => {
     return new Weather(
       data.main.temp,
       data.main.humidity,
@@ -86,6 +86,7 @@ private buildForecastArray(currentWeather: Weather, weatherData: any[]): Weather
       data.weather[0].icon
     );
   });
+  return [currentWeather, ...forecastArray];
 }
   // TODO: Complete getWeatherForCity method
 async getWeatherForCity(city: string): Promise<any> {
