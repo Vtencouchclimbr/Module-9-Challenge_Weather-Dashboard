@@ -26,7 +26,7 @@ class Weather {
 }
 // TODO: Complete the WeatherService class
 class WeatherService {
-  private baseURL = 'https://api.openweathermap.org/data/2.5/';
+  private baseURL = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}';
   private apiKey = process.env.OPENWEATHER_API_KEY;
   private cityName: string;
 

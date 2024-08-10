@@ -14,9 +14,9 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'City name is required'});
   }
   try {
-    const weatherData = await WeatherService.getWeatherByCityName(cityName);
+    const weatherData = await WeatherService.getWeatherForCity(cityName);
 
-    const cityWithId = await HistoryService.saveCity(cityName);
+    const cityWithId = await HistoryService.addCity(cityName);
 
     res.json({ city: cityWithId, weather: weatherData });
   } catch (error) {
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 // TODO: GET search history
 router.get('/history', async (req, res) => {
   try {
-    const history = await HistoryService.getHistory();
+    const history = await HistoryService.getCities();
     res.json(history);
   } catch (error) {
     console.error('Error retrieving history:', error);
@@ -41,7 +41,7 @@ router.delete('/history/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deletedCity = await HistoryService.deleteCityById(id);
+    const deletedCity = await HistoryService.removeCity(id);
 
     if (deletedCity) {
       res.json({ message: 'City deleted from history', city: deletedCity });
