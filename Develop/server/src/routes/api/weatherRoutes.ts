@@ -18,15 +18,15 @@ router.post('/', async (req, res) => {
 
     const cityWithId = await HistoryService.addCity(cityName);
 
-    res.json({ city: cityWithId, weather: weatherData });
+    return res.json({ city: cityWithId, weather: weatherData });
   } catch (error) {
     console.error('Error processing request:', error);
-    res.status(500).json({ error: 'Failed to retrieve weather data or save city to history' });
+    return res.status(500).json({ error: 'Failed to retrieve weather data or save city to history' });
   }
 });
 
 // TODO: GET search history
-router.get('/history', async (req, res) => {
+router.get('/history', async (_req, res) => {
   try {
     const history = await HistoryService.getCities();
     res.json(history);
