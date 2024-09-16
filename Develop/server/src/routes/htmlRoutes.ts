@@ -7,7 +7,13 @@ const router = Router();
 
 // TODO: Define route to serve index.html
 router.get('/', (_req, res) => {
-    res.sendFile(path.join(__dirname, '../../../client/dist/index.html'));
+    const indexPath = path.join(__dirname, '../../../client/dist/index.html');
+    res.sendFile(indexPath, (err) => {
+        if (err) {
+            console.error('Error sending index.html:', err);
+            res.status(500).send('Internal Server Error');
+        }
+    });
 });
 
 export default router;
